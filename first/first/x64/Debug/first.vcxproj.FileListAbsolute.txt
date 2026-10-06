@@ -1,0 +1,2 @@
+C:\Users\illvidri\source\repos\Sandbox-OpenGL\first\x64\Debug\glfw3.dll
+C:\Users\illvidri\source\repos\Sandbox-OpenGL\first\first\x64\Debug\first.vcxproj.Up2Date
