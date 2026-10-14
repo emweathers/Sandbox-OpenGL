@@ -115,9 +115,9 @@ int main() {
 			float x = i/M;
 			float y = j/M;
 			int random = std::rand();
-			float p1 = P(1, x+50, y-50, a, b, 10000, 10000);
-			float p2 = P(1, x, y+50, c, d, 10000, 10000);
-			float p3 = P(1, x-50, y-50, e, f, 10000, 10000);
+			float p1 = P(1, x+50, y-50, a, b, 100, 100);
+			float p2 = P(1, x, y+50, c, d, 100, 100);
+			float p3 = P(1, x-50, y-50, e, f, 100, 100);
 			if (random < (pow((l1 * p1 - l2 * p2 - l3 * p3), 2) * pow((l2 * p2 - l1 * p1 - l3 * p3), 2) * pow((l3 * p3 - l1 * p1 - l2 * p2), 2)) * (RAND_MAX + 1.0)) {
 				drawPixelLegacy(x + WIDTH / 2, y + HEIGHT / 2, pow((p3 - p1 - p2), 2), pow((p2 - p1 - p3), 2), pow((p1 - p2 - p3), 2));
 			}
@@ -132,6 +132,6 @@ int main() {
 
 float P(float Pmax, float X, float Y, float X_0, float Y_0, float s_X, float s_Y) {
 	float e = 2.718281828;
-	float temp = -1 * (((X - X_0) * (X - X_0) / (2 * s_X)) + ((Y - Y_0) * (Y - Y_0) / (2 * s_Y)));
+	float temp = -1 * (((X - X_0) * (X - X_0) / (2 * s_X * s_X)) + ((Y - Y_0) * (Y - Y_0) / (2 * s_Y * s_Y)));
 	return Pmax*pow(e,temp);
 }
