@@ -72,6 +72,9 @@ int main() {
 	int d = 0;
 	int e = 0;
 	int f = 0;
+	float l1 = 1;
+	float l2 = 1;
+	float l3 = 1;
 	// Main Loop
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
@@ -89,6 +92,24 @@ int main() {
 		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) e -= 10;
 		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) f += 10;
 		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) f -= 10;
+		if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) != GLFW_PRESS) l1 += 0.05;
+		if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) != GLFW_PRESS) l1 -= 0.05;
+		if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) != GLFW_PRESS) l2 += 0.05;
+		if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) != GLFW_PRESS) l2 -= 0.05;
+		if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) l3 += 0.05;
+		if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS
+			&& glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) l3 -= 0.05;
 
 		for (int i = -1*WIDTH/2; i < WIDTH/2; i++) for (int j = -1*HEIGHT/2; j < HEIGHT/2; j++) {
 			float x = i/M;
@@ -97,7 +118,7 @@ int main() {
 			float p1 = P(1, x+50, y-50, a, b, 10000, 10000);
 			float p2 = P(1, x, y+50, c, d, 10000, 10000);
 			float p3 = P(1, x-50, y-50, e, f, 10000, 10000);
-			if (random < (pow((p1 - p2 - p3), 2) * pow((p2 - p1 - p3), 2) * pow((p3 - p1 - p2), 2)) * (RAND_MAX + 1.0)) {
+			if (random < (pow((l1 * p1 - l2 * p2 - l3 * p3), 2) * pow((l2 * p2 - l1 * p1 - l3 * p3), 2) * pow((l3 * p3 - l1 * p1 - l2 * p2), 2)) * (RAND_MAX + 1.0)) {
 				drawPixelLegacy(x + WIDTH / 2, y + HEIGHT / 2, pow((p3 - p1 - p2), 2), pow((p2 - p1 - p3), 2), pow((p1 - p2 - p3), 2));
 			}
 		}
